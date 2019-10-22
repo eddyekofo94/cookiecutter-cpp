@@ -2,7 +2,6 @@
     "project_name": "rock",
     "repo_name": "{{ cookiecutter.project_name }}",
     "description": "A rock solid project with enforced style, testing and static analysis",
-    "maximum_cmake_version": "{{ cookiecutter.cmake_version }}",
     "check_style": true,
     "pedantic": true,
     "version": "0.0.1",

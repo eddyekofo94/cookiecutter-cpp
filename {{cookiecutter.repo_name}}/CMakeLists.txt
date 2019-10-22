@@ -1,7 +1,7 @@
 # {{ cookiecutter.project_name }}
 # {{ cookiecutter.description }}
 # Copyright {{ cookiecutter.year }}, {{ cookiecutter.author }}
-cmake_minimum_required(VERSION 3.1..."{{ cookiecutter.cmake_version }}")
+cmake_minimum_required(VERSION 3.1...3.14.2)
 project({{ cookiecutter.project_name }} C CXX)
 set(PROJECT_DESCRIPTION   "{{ cookiecutter.description }}")
 set(PROJECT_AUTHOR        "{{ cookiecutter.author }}")

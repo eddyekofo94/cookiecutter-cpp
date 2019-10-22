@@ -4,7 +4,7 @@ file(GLOB_RECURSE SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/*.h
     ${CMAKE_CURRENT_SOURCE_DIR}/*.hpp
 	${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
-))
+)
 
 add_executable(
 	{{ cookiecutter.project_name }}
@@ -12,7 +12,10 @@ add_executable(
     )
 
 include_directories(includes)
-target_include_directories (Main PUBLIC includes)
+target_include_directories (
+    {{ cookiecutter.project_name }}
+    PUBLIC includes
+    )
 
 include(CPack)
 # add_library({{ cookiecutter.project_name }}_lib SHARED ${SOURCES})

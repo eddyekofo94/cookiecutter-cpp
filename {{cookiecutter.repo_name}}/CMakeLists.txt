@@ -1,7 +1,7 @@
 # {{ cookiecutter.project_name }}
 # {{ cookiecutter.description }}
 # Copyright {{ cookiecutter.year }}, {{ cookiecutter.author }}
-cmake_minimum_required(VERSION 3.1...3.14.2)
+cmake_minimum_required(VERSION 3.1...3.17.0)
 project({{ cookiecutter.project_name }} C CXX)
 set(PROJECT_DESCRIPTION   "{{ cookiecutter.description }}")
 set(PROJECT_AUTHOR        "{{ cookiecutter.author }}")
@@ -31,6 +31,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR})
 # ---------------------------------------------------------
 # Features
 # ---------------------------------------------------------
+include_directories(src)
 add_subdirectory(external)
 add_subdirectory(test)
 add_subdirectory(src)
@@ -38,4 +39,8 @@ add_subdirectory(src)
 
 include(CTest)
 enable_testing()
+
+set(CPACK_PROJECT_NAME ${PROJECT_NAME})
+set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
+
 include(CPack)

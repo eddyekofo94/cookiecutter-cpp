@@ -1,3 +1,5 @@
+project(${PROJECT_NAME}_external)
+
 include(FetchContent)
 
 FetchContent_Declare(

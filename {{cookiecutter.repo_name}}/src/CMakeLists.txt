@@ -1,24 +1,26 @@
 # Target:   {{ cookiecutter.project_name }}_lib
 # Type:     Library
+project(${PROJECT_NAME}_test)
 file(GLOB_RECURSE SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/*.h
     ${CMAKE_CURRENT_SOURCE_DIR}/*.hpp
 	${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
 )
 
-add_executable(
-	{{ cookiecutter.project_name }}
-	${SOURCES}
-    )
+add_executable(${PROJECT_NAME} ${TEST_SOURCES})
 
 include_directories(includes)
-target_include_directories (
-    {{ cookiecutter.project_name }}
-    PUBLIC includes
-    )
+target_link_libraries(
+    ${PROJECT_NAME}
+    PUBLIC ${CMAKE_PROJECT_NAME}_lib
+    gtest gmock_main)
 
 include(CPack)
-# add_library({{ cookiecutter.project_name }}_lib SHARED ${SOURCES})
+add_library(${PROJECT_NAME}_lib SHARED ${SOURCES})
+# Register the tests
+add_test(NAME ${PROJECT_NAME}
+         COMMAND ${PROJECT_NAME})
+enable_testing(
 # set_target_properties({{ cookiecutter.project_name }}_lib PROPERTIES
 #     "OUTPUT_NAME" "{{ cookiecutter.project_name }}"
 #     "INCLUDE_DIRECTORIES" "${CMAKE_CURRENT_SOURCE_DIR}/include"

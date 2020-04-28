@@ -6,7 +6,7 @@ class {{cookiecutter.project_name | capitalize}}TestSuite : public ::testing::Te
 {
 public:
     ~{{cookiecutter.project_name}}TestSuite() = default;
-}
+};
 
 TEST({{cookiecutter.project_name | capitalize}}TestSuite, Contrived)
 {

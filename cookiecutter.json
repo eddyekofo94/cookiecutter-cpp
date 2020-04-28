@@ -5,7 +5,7 @@
     "check_style": true,
     "pedantic": true,
     "version": "0.0.1",
-    "year": 2019,
+    "year": 2020,
     "author": "First Last",
     "email": "{{ cookiecutter.author.split()|join('.')|lower }}@gmail.com",
     "username": "{{ cookiecutter.author|first|lower }}{{ cookiecutter.author.split()|last|lower }}",

@@ -48,8 +48,7 @@ Checks: >
 # Turn all the warnings from the checks above into errors.
 WarningsAsErrors: "*"
 
-# TODO(#3920) - Enable clang-tidy checks in our headers.
-HeaderFilterRegex: "google/cloud/pubsub/.*"
+HeaderFilterRegex:  'src\/.*.hpp'
 
 CheckOptions:
   - { key: readability-identifier-naming.NamespaceCase,          value: lower_case }

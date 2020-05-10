@@ -20,6 +20,11 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR})
 
+# Build flags		
+ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -march=native")		
+ {% if cookiecutter.pedantic -%}		
+ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror -pedantic")		
+ {%- endif %}
 
 # ---------------------------------------------------------
 # Features
@@ -29,6 +34,37 @@ add_subdirectory(external)
 add_subdirectory(test)
 add_subdirectory(src)
 # add_subdirectory(doc)
+
+# Link this 'library' to use the warnings specified in CompilerWarnings.cmake
+add_library(project_warnings INTERFACE)
+
+# enable doxygen
+include(cmake/Doxygen.cmake)
+enable_doxygen()
+
+# allow for static analysis options
+include(cmake/StaticAnalyzers.cmake)
+
+# standard compiler warnings
+include(cmake/CompilerWarnings.cmake)
+set_project_warnings(project_warnings)
+
+# sanitizer options if supported by compiler
+include(cmake/Sanitizers.cmake)
+enable_sanitizers(project_options)
+
+include(cmake/StandardProjectSettings.cmake)
+
+# Very basic PCH example
+option(ENABLE_PCH "Enable Precompiled Headers" OFF)
+if (ENABLE_PCH)
+  # This sets a global PCH parameter, each project will build its own PCH, which
+  # is a good idea if any #define's change
+  # 
+  # consider breaking this out per project as necessary 
+  target_precompile_headers(project_options INTERFACE <vector> <string> <map> <utility>)
+endif()
+
 
 include(CTest)
 enable_testing()

@@ -22,9 +22,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR})
 
 # Build flags		
  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -march=native")		
- {% if cookiecutter.pedantic -%}		
+ {%- if cookiecutter.pedantic -%}		
  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror -pedantic")		
- {%- endif %}
+ {% endif %}
 
 # ---------------------------------------------------------
 # Features
@@ -33,28 +33,25 @@ include_directories(src)
 add_subdirectory(external)
 add_subdirectory(test)
 add_subdirectory(src)
-# add_subdirectory(doc)
-
-# Link this 'library' to use the warnings specified in CompilerWarnings.cmake
-add_library(project_warnings INTERFACE)
-
-# enable doxygen
-include(cmake/Doxygen.cmake)
-enable_doxygen()
 
 # allow for static analysis options
 include(cmake/StaticAnalyzers.cmake)
+
+# Link this 'library' to use the warnings specified in CompilerWarnings.cmake
+add_library(project_warnings INTERFACE)
 
 # standard compiler warnings
 include(cmake/CompilerWarnings.cmake)
 set_project_warnings(project_warnings)
 
+ {%- if cookiecutter.advanced -%}		
+# enable doxygen
+include(cmake/Doxygen.cmake)
+enable_doxygen()
+
 # sanitizer options if supported by compiler
 include(cmake/Sanitizers.cmake)
 enable_sanitizers(project_options)
-
-include(cmake/StandardProjectSettings.cmake)
-
 # Very basic PCH example
 option(ENABLE_PCH "Enable Precompiled Headers" OFF)
 if (ENABLE_PCH)
@@ -65,6 +62,7 @@ if (ENABLE_PCH)
   target_precompile_headers(project_options INTERFACE <vector> <string> <map> <utility>)
 endif()
 
+include(cmake/StandardProjectSettings.cmake)
 
 include(CTest)
 enable_testing()
@@ -73,3 +71,4 @@ set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 
 include(CPack)
+ {% endif %}

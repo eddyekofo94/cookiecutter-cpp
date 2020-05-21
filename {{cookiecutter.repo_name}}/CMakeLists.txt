@@ -20,9 +20,10 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR})
 
-# Build flags		
- set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -march=native")		
+	
  {%- if cookiecutter.pedantic -%}		
+ # Build flags		
+ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -march=native")	
  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror -pedantic")		
  {% endif %}
 
@@ -44,7 +45,7 @@ add_library(project_warnings INTERFACE)
 include(cmake/CompilerWarnings.cmake)
 set_project_warnings(project_warnings)
 
- {% if cookiecutter.advanced %}		
+{% if cookiecutter.advanced %}		
 # enable doxygen
 include(cmake/Doxygen.cmake)
 enable_doxygen()
@@ -71,4 +72,4 @@ set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 
 include(CPack)
- {% endif %}
+{% endif %}

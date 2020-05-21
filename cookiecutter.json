@@ -1,5 +1,5 @@
 {
-    "project_name": "rock",
+    "project_name": "Rock",
     "repo_name": "{{ cookiecutter.project_name }}",
     "description": "A rock solid project with enforced style, testing and static analysis",
     "advanced": false,

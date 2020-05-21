@@ -44,7 +44,7 @@ add_library(project_warnings INTERFACE)
 include(cmake/CompilerWarnings.cmake)
 set_project_warnings(project_warnings)
 
- {%- if cookiecutter.advanced -%}		
+ {% if cookiecutter.advanced %}		
 # enable doxygen
 include(cmake/Doxygen.cmake)
 enable_doxygen()

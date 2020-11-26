@@ -14,6 +14,9 @@ set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 set(CMAKE_CXX_STANDARD 17)
 
+# Generates a compile_commands.json 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 # place binaries and libraries according to GNU standards
 include(GNUInstallDirs)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})

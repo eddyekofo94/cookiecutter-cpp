@@ -6,10 +6,10 @@
     "check_style": true,
     "pedantic": true,
     "version": "0.0.1",
-    "year": 2020,
-    "author": "First Last",
-    "email": "{{ cookiecutter.author.split()|join('.')|lower }}@gmail.com",
-    "username": "{{ cookiecutter.author|first|lower }}{{ cookiecutter.author.split()|last|lower }}",
+    "year": 2021,
+    "author": "Eddy Ekofo",
+    "email": "eddyecko@gmail.com",
+    "username": "eddyekofo94",
     "branch": "master",
     "remote": "origin"
 }

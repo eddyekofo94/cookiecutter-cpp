@@ -21,10 +21,12 @@ if [[ -z $ARG_2 ]]; then
     echo "Building ALL the targets"
     cmake --build . -- -j4
 
-elif [[ "$ARG_2" == "--src" ]] || [[ "$ARG_2" == "-s" ]]; then
+elif [[ "$ARG_2" == "--src" ]] || [[ "$ARG_2" == "-s" ]];
+then
     echo "Building \"$SRC_BIN\" executable target"
     cmake --build . --target $SRC_BIN -- -j4
-elif [[ "$ARG_2" == "--test" ]] || [[ "$ARG_2" == "-t" ]]; then
+elif [[ "$ARG_2" == "--test" ]] || [[ "$ARG_2" == "-t" ]];
+then
     echo "Building \"$TEST_BIN\" executable target"
     cmake --build . --target $TEST_BIN -- -j4
 else
@@ -35,18 +37,19 @@ fi
 run_code() {
 if [[ "$ARG_2" == "--src" ]] || [[ "$ARG_2" == "-s" ]]
 then
-    if [[ ! -f $SRC_BIN ]];
-    then
-        build $ARG_2
-    fi
-    ./bin/$SRC_BIN
+    build $ARG_2 && ./bin/$SRC_BIN
 elif [[ "$ARG_2" == "--test" ]] || [[ "$ARG_2" == "-t" ]]
 then
-    if [[ ! -f $TEST_BIN ]];
-    then
-        build $ARG_2
-    fi
-    ./bin/$TEST_BIN
+    build $ARG_2 && ./bin/$TEST_BIN
+elif [[ $# -eq 1 ]] && [[ "$ARG_1" == "-r" ]];
+then
+    echo "Building \"$SRC_BIN\" executable target"
+    cmake --build . --target $SRC_BIN -- -j4 && ./bin/$SRC_BIN
+
+elif [[ $# -eq 1 ]] && [[ "$ARG_1" == "-t" ]];
+then
+    echo "Building \"$TEST_BIN\" executable target"
+    cmake --build . --target $TEST_BIN -- -j4 && ./bin/$TEST_BIN
 else
     echo "Error: connot run target \"$ARG_2\""
 fi
@@ -54,7 +57,7 @@ fi
 
 clean() {
 if [[ -z $ARG_2 ]]; then
-    cmake --clean-first ../CMakeLists.txt -B $BUILD_DIR
+    cmake --clean-first $PROJECT_ROOT_DIR/CMakeLists.txt -B $BUILD_DIR
 elif [[ "$ARG_2" == "--src" ]] || [[ "$ARG_2" == "-s" ]]; then
     cmake --build . --clean-first --target $SRC_BIN -- -j4
 elif [[ "$ARG_2" == "--test" ]] || [[ "$ARG_2" == "-t" ]]; then
@@ -70,6 +73,8 @@ else
     if [[ "$ARG_1" == "--build" ]] || [[ "$ARG_1" == "-b" ]]; then
         build $ARG_1
     elif [ "$ARG_1" == "--run" ] || [ "$ARG_1" == "-r" ]; then
+        run_code $ARG_1
+    elif [ "$ARG_1" == "--test" ] || [ "$ARG_1" == "-t" ]; then
         run_code $ARG_1
     elif [[ "$ARG_1" == "--clean" ]] || [[ "$ARG_1" == "-c" ]]; then
         clean $ARG_1

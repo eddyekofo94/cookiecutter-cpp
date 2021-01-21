@@ -1,7 +1,7 @@
 # {{ cookiecutter.project_name }}
 # {{ cookiecutter.description }}
 # Copyright {{ cookiecutter.year }}, {{ cookiecutter.author }}
-cmake_minimum_required(VERSION 3.1...3.19.1)
+cmake_minimum_required(VERSION 3.1...3.19.2)
 project({{ cookiecutter.project_name }} C CXX)
 set(PROJECT_DESCRIPTION   "{{ cookiecutter.description }}")
 set(PROJECT_AUTHOR        "{{ cookiecutter.author }}")
@@ -14,7 +14,7 @@ set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 set(CMAKE_CXX_STANDARD 17)
 
-# Generates a compile_commands.json 
+# Generates a compile_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # place binaries and libraries according to GNU standards
@@ -23,11 +23,11 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR})
 
-	
- {%- if cookiecutter.pedantic -%}		
- # Build flags		
- set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -march=native")	
- set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror -pedantic")		
+
+ {%- if cookiecutter.pedantic -%}
+ # Build flags
+ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -march=native")
+ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror -pedantic")
  {% endif %}
 
 # ---------------------------------------------------------
@@ -48,7 +48,7 @@ add_library(project_warnings INTERFACE)
 include(cmake/CompilerWarnings.cmake)
 set_project_warnings(project_warnings)
 
-{% if cookiecutter.advanced %}		
+{% if cookiecutter.advanced %}
 # enable doxygen
 include(cmake/Doxygen.cmake)
 enable_doxygen()
@@ -61,8 +61,8 @@ option(ENABLE_PCH "Enable Precompiled Headers" OFF)
 if (ENABLE_PCH)
   # This sets a global PCH parameter, each project will build its own PCH, which
   # is a good idea if any #define's change
-  # 
-  # consider breaking this out per project as necessary 
+  #
+  # consider breaking this out per project as necessary
   target_precompile_headers(project_options INTERFACE <vector> <string> <map> <utility>)
 endif()
 

@@ -58,7 +58,7 @@ fi
 
 clean() {
 if [[ -z $ARG_2 ]]; then
-    cmake --clean-first $PROJECT_ROOT_DIR/CMakeLists.txt -B $BUILD_DIR
+    cmake --clean-first $PROJECT_ROOT_DIR -B $BUILD_DIR
 elif [[ "$ARG_2" == "--src" ]] || [[ "$ARG_2" == "-s" ]]; then
     cmake --build . --clean-first --target $SRC_BIN -- -j4
 elif [[ "$ARG_2" == "--test" ]] || [[ "$ARG_2" == "-t" ]]; then

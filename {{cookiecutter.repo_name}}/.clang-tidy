@@ -30,6 +30,8 @@ Checks: >
   bugprone-*,
   google-*,
   misc-*,
+  clang-diagnostic-*,
+  clang-analyzer-*,
   modernize-*,
   performance-*,
   portability-*,
@@ -40,13 +42,30 @@ Checks: >
   -misc-non-private-member-variables-in-classes,
   -modernize-return-braced-init-list,
   -performance-move-const-arg,
+  -modernize-concat-nested-namespaces,
   -readability-named-parameter,
   -modernize-use-trailing-return-type,
   -readability-braces-around-statements,
-  -readability-redundant-declaration
-
+  -readability-redundant-declaration,
+  -modernize-pass-by-value,
+  -modernize-use-auto,
+  -modernize-use-using
+  -cppcoreguidelines-avoid-magic-numbers,
+  -cppcoreguidelines-pro-bounds-constant-array-index,
+  -cppcoreguidelines-pro-bounds-pointer-arithmetic,
+  -cppcoreguidelines-pro-type-reinterpret-cast,
+  -cppcoreguidelines-no-malloc,
+  -cppcoreguidelines-owning-memory,
+  -cppcoreguidelines-macro-usage,
+  -cppcoreguidelines-pro-type-vararg,
+  -cppcoreguidelines-pro-bounds-array-to-pointer-decay,
+  -fuchsia-overloaded-operator,
+  -fuchsia-default-arguments,
+  -fuchsia-multiple-inheritance,
+  -fuchsia-default-arguments-calls,
+  -fuchsia-trailing-return,
 # Turn all the warnings from the checks above into errors.
-WarningsAsErrors: "*"
+WarningsAsErrors: " "
 
 HeaderFilterRegex:  'src\/.*.hpp'
 

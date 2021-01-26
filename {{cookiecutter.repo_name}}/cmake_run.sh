@@ -15,7 +15,6 @@ ARG_1="$1"
 ARG_2="$2"
 SRC_BIN="{{ cookiecutter.project_name }}_src"
 TEST_BIN="{{ cookiecutter.project_name }}_test"
-COMPILE_COMMANDS="compile_commands.json"
 
 build() {
 if [[ -z $ARG_2 ]]; then
@@ -66,24 +65,10 @@ elif [[ "$ARG_2" == "--test" ]] || [[ "$ARG_2" == "-t" ]]; then
 fi
 }
 
-compile_commands_config()
-{
-    echo "[INFO] Moving the compile_commands.json file"
-    if [[ -f $PROJECT_ROOT_DIR/$COMPILE_COMMANDS ]]; then
-        echo "compile_commands.json exists on the ROOT DIR"
-       rm $COMPILE_COMMANDS && mv $BUILD_DIR/$COMPILE_COMMANDS $PROJECT_ROOT_DIR
-    else
-        echo "Moving compile_comands.json file to the ROOT DIR"
-       mv $BUILD_DIR/$COMPILE_COMMANDS $PROJECT_ROOT_DIR && echo "$COMPILE_COMMANDS moved
-       to $PROJECT_ROOT_DIR"
-    fi
-}
-
 cmake_run() {
 if [[ $# -eq 0 ]]; then
     echo "Building ALL the targets"
     cmake --build . -- -j4
-    compile_commands_config
 else
     if [[ "$ARG_1" == "--build" ]] || [[ "$ARG_1" == "-b" ]]; then
         build $ARG_1
@@ -104,7 +89,6 @@ if [[ $(pwd) != $PROJECT_ROOT_DIR ]]; then
     if [[ ! -d $BUILD_DIR ]]; then
         cmake -S $PROJECT_ROOT_DIR -B $BUILD_DIR
         cmake --build $BUILD_DIR -- -j4
-        compile_commands_config
     else
         cd $BUILD_DIR
         cmake_run $ARG_1

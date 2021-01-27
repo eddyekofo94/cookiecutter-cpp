@@ -14,6 +14,10 @@ set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 set(CMAKE_CXX_STANDARD 17)
 
+# This enables debuging features, if removed the code is
+# optimised
+set(CMAKE_BUILD_TYPE Debug)
+
 # Generates a compile_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 

@@ -42,6 +42,7 @@ Checks: >
   -google-readability-braces-around-statements,
   -google-readability-namespace-comments,
   -google-runtime-references,
+  -hicpp-braces-around-statements,
   -misc-non-private-member-variables-in-classes,
   -modernize-return-braced-init-list,
   -performance-move-const-arg,
